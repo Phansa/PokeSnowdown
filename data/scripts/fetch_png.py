@@ -5,6 +5,8 @@ import os
 def get_sprites (path):
         with open('../pokemon.json') as infile:    
                 pokemon = json.load(infile)
+        if(not(os.path.isdir("../" + path))):
+                os.makedirs("../" + path)
         for pokey in pokemon:
                 outputString = pokey
                 # These files have changed on the image website but remain in the
@@ -64,6 +66,6 @@ def main():
         get_sprites("sprites-shiny")
         get_sprites("back-sprites")
         get_sprites("sprites")
-
+        
 if __name__ == "__main__":
         main()
