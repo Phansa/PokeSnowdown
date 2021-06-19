@@ -64,7 +64,7 @@ def get_sprites (path):
                         print(outputString)
                 except:
                     sleep(2)
-                    main()
+                    get_sprites(path)
 
 def main():
         get_sprites("back-sprites-shiny")
