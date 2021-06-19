@@ -1,6 +1,7 @@
 from urllib.request import Request, urlopen 
 import json 
 import os
+from time import sleep
 
 def get_sprites (path):
         with open('../pokemon.json') as infile:    
@@ -48,7 +49,8 @@ def get_sprites (path):
                 # Only processes files which don't already exist. This is useful
                 # as there is a rate limit on the image website that causes connections
                 # to be closed. When that happens, we don't want to redownload files.
-                if(not(os.path.isfile(name_of_file))):
+                try:
+                    if(not(os.path.isfile(name_of_file))):
                         outputString += " - Added"
                         gif = urlopen(req)
                         gif_file = open(name_of_file, 'wb')
@@ -60,6 +62,9 @@ def get_sprites (path):
                                 gif_file.write(buffer)
                         gif_file.close()
                         print(outputString)
+                except:
+                    sleep(2)
+                    main()
 
 def main():
         get_sprites("back-sprites-shiny")
